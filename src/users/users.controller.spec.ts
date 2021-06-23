@@ -1,18 +1,26 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from './users.controller';
+import { UsersService } from './users.service';
+import { User } from './interfaces/user.interface';
 
 describe('UsersController', () => {
-  let controller: UsersController;
+  let usersController: UsersController;
+  let usersService: UsersService;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+    const moduleRef = await Test.createTestingModule({
       controllers: [UsersController],
+      providers: [UsersService],
     }).compile();
 
-    controller = module.get<UsersController>(UsersController);
+    // usersService = moduleRef.get<UsersService>(UsersService);
+    usersController = moduleRef.get<UsersController>(UsersController);
   });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
+  describe.only('Tests for the users module', async () => {
+    it('should be defined', () => {
+      console.log('hello');
+      expect(usersController).toBeDefined();
+    });
   });
 });
